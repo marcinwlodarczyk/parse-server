@@ -95,7 +95,8 @@ function RestQuery(
   for (var option in restOptions) {
     switch (option) {
       case 'keys': {
-        const keys = restOptions.keys.split(',').concat(AlwaysSelectedKeys);
+        let keys = restOptions.keys.split(',');
+        if (keys[0].charAt(0) !== '-') keys = keys.concat(AlwaysSelectedKeys);
         this.keys = Array.from(new Set(keys));
         break;
       }

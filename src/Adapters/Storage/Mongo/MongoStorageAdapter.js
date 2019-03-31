@@ -609,7 +609,9 @@ export class MongoStorageAdapter implements StorageAdapter {
           memo['_rperm'] = 1;
           memo['_wperm'] = 1;
         } else {
-          memo[transformKey(className, key, schema)] = 1;
+          const shouldInclude = (key.charAt(0) !== '-');
+          if (!shouldInclude) key = key.split('-')[1];
+          memo[transformKey(className, key, schema)] = shouldInclude;
         }
         return memo;
       },
